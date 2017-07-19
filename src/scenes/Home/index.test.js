@@ -3,7 +3,6 @@ import { Map } from 'immutable';
 import renderer from 'react-test-renderer';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
-import { StaticRouter } from 'react-router';
 import ConnectedHome from './index';
 
 describe('Register Scene', () => {
@@ -19,17 +18,19 @@ describe('Register Scene', () => {
   const RegisterScene = () =>
     mount(
       <Provider store={store}>
-        <StaticRouter context={context}>
-          <ConnectedHome />
-        </StaticRouter>
+        <ConnectedHome />
       </Provider>
     );
   beforeEach(() => {
     props = {};
     store = storeFake(props);
   });
-  it('should match snapshot', () => {
-    const tree = renderer.create(<ConnectedHome />).toJSON();
-    expect(tree).toMatchSnapshot();
+  // TODO:
+  //   it('should match snapshot', () => {
+  //     const tree = renderer.create(<ConnectedHome />).toJSON();
+  //     expect(tree).toMatchSnapshot();
+  //   });
+  it('should render Google Map Component', () => {
+    expect(RegisterScene().find(GoogleMapComponent).length).toBe(1);
   });
 });
