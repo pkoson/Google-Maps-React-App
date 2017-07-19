@@ -18,6 +18,7 @@ export class Home extends Component {
           mapElement={<div style={{ height: `400px` }} />}
           center={this.props.Home.get('origin')}
           // directions={this.state.directions}
+          onMapClick={this.props.actions.onMapClicked}
         />
       </div>
     );

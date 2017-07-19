@@ -15,6 +15,8 @@ export const initialState = Map({
 });
 const HomeReducer = (state: StateType = initialState, action: ActionType) => {
   switch (action.type) {
+    case type.ON_MAP_CLICKED:
+      return state;
     default:
       return state;
   }
