@@ -10,7 +10,9 @@ export type ActionType = {
   payload: Array<string>
 };
 
-export const initialState = Map({});
+export const initialState = Map({
+  origin: new window.google.maps.LatLng(50.06143, 19.93658)
+});
 const HomeReducer = (state: StateType = initialState, action: ActionType) => {
   switch (action.type) {
     default:
