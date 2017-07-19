@@ -1,4 +1,4 @@
-import * as types from './actionTypes';
+import * as types from './actionsTypes';
 
 type PayloadType = string | number;
 
@@ -7,9 +7,9 @@ export type ActionReturnType = {
   payload: PayloadType
 };
 
-export function test(payload: PayloadType): ActionReturnType {
+export function onMapClicked(payload: PayloadType): ActionReturnType {
   return {
-    type: types.TEST,
+    type: types.ON_MAP_CLICKED,
     payload
   };
 }
