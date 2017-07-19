@@ -23,7 +23,12 @@ describe('Register Scene', () => {
       </Provider>
     );
   beforeEach(() => {
-    props = {};
+    props = {
+      onMapClicked: jest.fn(),
+      Home: Map({
+        origin: new window.google.maps.LatLng(50.06143, 19.93658)
+      })
+    };
     store = storeFake(props);
   });
   // TODO:
@@ -33,5 +38,9 @@ describe('Register Scene', () => {
   //   });
   it('should render Google Map Component', () => {
     expect(RegisterScene().find(GoogleMap).length).toBe(1);
+  });
+  it('should call handleClick after click on map', () => {
+    RegisterScene().find(GoogleMap).simulate('click');
+    expect(props.onMapClicked).toBeCalled();
   });
 });
