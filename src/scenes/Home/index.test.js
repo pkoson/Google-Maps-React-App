@@ -4,6 +4,7 @@ import renderer from 'react-test-renderer';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
 import ConnectedHome from './index';
+import GoogleMap from './components/GoogleMap';
 
 describe('Register Scene', () => {
   let store;
@@ -31,6 +32,6 @@ describe('Register Scene', () => {
   //     expect(tree).toMatchSnapshot();
   //   });
   it('should render Google Map Component', () => {
-    expect(RegisterScene().find(GoogleMapComponent).length).toBe(1);
+    expect(RegisterScene().find(GoogleMap).length).toBe(1);
   });
 });
