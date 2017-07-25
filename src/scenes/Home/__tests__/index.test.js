@@ -4,7 +4,7 @@ import renderer from 'react-test-renderer';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
 import ConnectedHome from '../index';
-import { MapBox } from '../styled';
+import { MapBox, Button } from '../styled';
 
 describe('Register Scene', () => {
   let store;
@@ -40,6 +40,6 @@ describe('Register Scene', () => {
   });
   it('should call getDirection function after clcik on button', () => {
     RegisterScene().find(Button).simulate('click');
-    expect(props.getDirection).toBeCalled();
+    expect(props.actions.getDirection).toBeCalled();
   });
 });
