@@ -4,23 +4,31 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { mapActionsToProps } from '../../utils';
-
-import GoogleMapComponent from './components/GoogleMap';
+import { MapBox } from './styled';
 
 const google = window.google;
 
 export class Home extends Component {
+  map: HTMLDivElement;
+  map = null;
+  componentDidMount = () => {
+    this.initMap();
+  };
+
+  initMap = () => {
+    const startPointer = { lng: 19.93658, lat: 50.06143 };
+    const map = new google.maps.Map(this.map, {
+      zoom: 14,
+      center: startPointer
+    });
+  };
   render() {
     return (
-      <div>
-        <GoogleMapComponent
-          containerElement={<div style={{ height: '400px' }} />}
-          mapElement={<div style={{ height: `400px` }} />}
-          center={this.props.Home.get('origin')}
-          // directions={this.state.directions}
-          onMapClick={this.props.actions.onMapClicked}
-        />
-      </div>
+      <MapBox
+        innerRef={map => {
+          this.map = map;
+        }}
+      />
     );
   }
 }
