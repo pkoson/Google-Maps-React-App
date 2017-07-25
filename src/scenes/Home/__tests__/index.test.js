@@ -24,7 +24,7 @@ describe('Register Scene', () => {
     );
   beforeEach(() => {
     props = {
-      actions: { onMapClicked: jest.fn() },
+      actions: { getDirection: jest.fn() },
       Home: Map({
         origin: new window.google.maps.LatLng(50.06143, 19.93658)
       })
@@ -37,5 +37,9 @@ describe('Register Scene', () => {
   // });
   it('should render Google Map Component', () => {
     expect(RegisterScene().find(MapBox).length).toBe(1);
+  });
+  it('should call getDirection function after clcik on button', () => {
+    RegisterScene().find(Button).simulate('click');
+    expect(props.getDirection).toBeCalled();
   });
 });
