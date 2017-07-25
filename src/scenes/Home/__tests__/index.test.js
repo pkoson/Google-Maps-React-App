@@ -3,8 +3,8 @@ import { Map } from 'immutable';
 import renderer from 'react-test-renderer';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
-import ConnectedHome from './index';
-import { MapBox } from './styled';
+import ConnectedHome from '../index';
+import { MapBox } from '../styled';
 
 describe('Register Scene', () => {
   let store;
@@ -38,5 +38,4 @@ describe('Register Scene', () => {
   it('should render Google Map Component', () => {
     expect(RegisterScene().find(MapBox).length).toBe(1);
   });
-  it('should add new marker after called onMapClikedAction', () => {});
 });
