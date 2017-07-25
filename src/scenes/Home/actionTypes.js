@@ -1,1 +1,2 @@
 export const ON_MAP_CLICKED = 'ON_MAP_CLICKED';
+export const GET_DIRECTIONS = 'GET_DIRECTIONS';

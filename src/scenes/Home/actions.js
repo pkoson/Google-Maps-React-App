@@ -13,3 +13,9 @@ export function onMapClicked(payload: PayloadType): ActionReturnType {
     payload
   };
 }
+export function getDirection(payload: PayloadType): ActionReturnType {
+  return {
+    type: types.GET_DIRECTIONS,
+    payload
+  };
+}
