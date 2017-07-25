@@ -3,7 +3,7 @@
 import { Map, List } from 'immutable';
 import * as type from './actionTypes';
 
-type StateType = Map<string, List<*>>;
+export type StateType = Map<string, List<*>>;
 
 export type ActionType = {
   type: string,
