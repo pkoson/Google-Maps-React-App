@@ -1,7 +1,7 @@
 // @flow
 
 import { Map } from 'immutable';
-import * as type from './actionsTypes';
+import * as type from './actionTypes';
 
 type StateType = Map<string, {}>;
 

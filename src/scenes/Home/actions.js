@@ -1,4 +1,4 @@
-import * as types from './actionsTypes';
+import * as types from './actionTypes';
 
 type PayloadType = string | number;
 
