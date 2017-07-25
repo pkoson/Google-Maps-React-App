@@ -20,4 +20,11 @@ describe('HomeReducer', () => {
       List([payload])
     );
   });
+  // google Directions service is asynchronous
+  it('should handle GET_DIRECTION action', () => {
+    const action = {
+      type: type.GET_DIRECTION
+    };
+    expect(HomeReducer(undefined, action).get('calculating')).toBe(true);
+  });
 });
