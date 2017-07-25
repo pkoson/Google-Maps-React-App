@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Map, List } from 'immutable';
 
 import { mapActionsToProps } from '../../utils';
-import { MapBox } from './styled';
+import { MapBox, Button } from './styled';
 
 import type { StateType } from './reducer';
 
@@ -44,11 +44,17 @@ export class Home extends Component {
   };
   render() {
     return (
-      <MapBox
-        innerRef={map => {
-          this.map = map;
-        }}
-      />
+      <div>
+        <MapBox
+          innerRef={map => {
+            this.map = map;
+          }}
+        />
+        <p>Map options:</p>
+        <Button onClick={() => this.props.actions.getDirection()}>
+          Get Direction
+        </Button>
+      </div>
     );
   }
 }
