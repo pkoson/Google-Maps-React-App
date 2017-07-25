@@ -16,12 +16,18 @@ export class Home extends Component {
   };
 
   initMap = () => {
+    // TODO: get it from initial state
     const startPointer = { lng: 19.93658, lat: 50.06143 };
     const map = new google.maps.Map(this.map, {
       zoom: 14,
       center: startPointer
     });
+    // add onClick event listener
+    google.maps.event.addListener(map, 'click', event => {
+      this.props.actions.onMapClicked(event.latLng, map);
+    });
   };
+  componentDidUpdate = () => {};
   render() {
     return (
       <MapBox
