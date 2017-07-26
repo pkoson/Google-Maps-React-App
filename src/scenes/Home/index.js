@@ -29,7 +29,9 @@ export class Home extends Component {
       zoom: 14,
       center: startPointer
     });
-    this.directionsDisplay.setMap(this.GoogleMap);
+    if (this.directionsDisplay.setMap) {
+      this.directionsDisplay.setMap(this.GoogleMap);
+    }
     // add onClick event listener
     google.maps.event.addListener(this.GoogleMap, 'click', event => {
       this.props.actions.onMapClicked(event.latLng, this.GoogleMap);
@@ -51,7 +53,6 @@ export class Home extends Component {
       optimizeWaypoints: true
     };
     this.directionsService.route(directionData, (result, status) => {
-      console.log(result);
       if (status == 'OK') {
         this.directionsDisplay.setDirections(result);
       }
@@ -78,7 +79,12 @@ export class Home extends Component {
           }}
         />
         <p>Map options:</p>
-        <Button onClick={() => this.getDirection()}>Get Direction</Button>
+        <Button
+          onClick={() => this.getDirection()}
+          disabled={this.props.Home.get('markers').size <= 1}
+        >
+          Get Direction
+        </Button>
       </div>
     );
   }
