@@ -28,7 +28,8 @@ describe('Register Scene', () => {
       actions: { onMapClicked: jest.fn() },
       Home: Map({
         origin: new window.google.maps.LatLng(50.06143, 19.93658),
-        markers: List()
+        markers: List(),
+        directions: List()
       })
     };
     directionsDisplay = { setMap: () => {} };
@@ -41,4 +42,6 @@ describe('Register Scene', () => {
   it('should render Google Map Component', () => {
     expect(RegisterScene().find(MapBox).length).toBe(1);
   });
+  // TODO: add test for directionsService
+  // TODO: add test for renderPreviousDirections
 });

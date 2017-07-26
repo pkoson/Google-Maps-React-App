@@ -54,7 +54,7 @@ export class Home extends Component {
     };
     this.directionsService.route(directionData, (result, status) => {
       if (status == 'OK') {
-        // TODO: push result to store
+        this.props.actions.saveDirection(result);
         this.directionsDisplay.setDirections(result);
       }
     });
@@ -71,6 +71,17 @@ export class Home extends Component {
     if (prevProps.Home.get('markers').size !== markersProp)
       this.addMarkerToMap(markersProp, this.GoogleMap);
   };
+  renderPreviousDirections = () =>
+    this.props.Home.get('directions').toArray().map((direction, i) =>
+      <div key={i}>
+        <p>
+          Direction index: {i}
+        </p>
+        <Button onClick={() => this.directionsDisplay.setDirections(direction)}>
+          show direction
+        </Button>
+      </div>
+    );
   render() {
     return (
       <div>
@@ -86,6 +97,20 @@ export class Home extends Component {
         >
           Get Direction
         </Button>
+        <Button
+        // TODO: add clear function
+        // onClick={() => this.getDirection()}
+        // disabled={this.props.Home.get('markers').size <= 1}
+        >
+          Clear result
+        </Button>
+        {
+          //TODO: add render statement
+          <div>
+            <p>Previous directions:</p>
+            {this.renderPreviousDirections()}
+          </div>
+        }
       </div>
     );
   }
