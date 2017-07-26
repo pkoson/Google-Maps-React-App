@@ -19,3 +19,9 @@ export function getDirection(payload: PayloadType): ActionReturnType {
     payload
   };
 }
+export function saveDirection(payload: PayloadType): ActionReturnType {
+  return {
+    type: types.SAVE_DIRECTIONS,
+    payload
+  };
+}
