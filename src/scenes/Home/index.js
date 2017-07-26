@@ -16,6 +16,8 @@ export class Home extends Component {
   GoogleMap: any;
   directionsService: any;
   directionsDisplay: any;
+  // TODO:
+  markersInMap = [];
   componentDidMount = () => {
     this.initMap();
   };
@@ -29,9 +31,6 @@ export class Home extends Component {
       zoom: 14,
       center: startPointer
     });
-    if (this.directionsDisplay.setMap) {
-      this.directionsDisplay.setMap(this.GoogleMap);
-    }
     // add onClick event listener
     google.maps.event.addListener(this.GoogleMap, 'click', event => {
       this.props.actions.onMapClicked(event.latLng, this.GoogleMap);
@@ -40,6 +39,7 @@ export class Home extends Component {
 
   // TODO: move it to saga
   getDirection = () => {
+    this.directionsDisplay.setMap(this.GoogleMap);
     const markers = this.props.Home.get('markers');
     const directionData = {
       origin: markers.first(),
@@ -56,33 +56,56 @@ export class Home extends Component {
       if (status == 'OK') {
         this.props.actions.saveDirection(result);
         this.directionsDisplay.setDirections(result);
+        this.clearMarkers();
       }
     });
-    // TODO: removes all markers
+  };
+
+  clearDirection = () => {
+    this.directionsDisplay.setMap(null);
+  };
+
+  clearMarkers = () => {
+    this.markersInMap.forEach(marker => {
+      marker.setMap(null);
+    });
+    this.markersInMap = [];
+    this.props.actions.clearMarkers();
   };
   addMarkerToMap = (marker: List<*>, map: any) => {
     const newMarker = new google.maps.Marker({
       position: { lat: marker.last().lat(), lng: marker.last().lng() },
       map
     });
+    this.markersInMap.push(newMarker);
   };
-  componentDidUpdate = (prevProps: { Home: StateType }) => {
-    const markersProp = this.props.Home.get('markers');
-    if (prevProps.Home.get('markers').size !== markersProp)
-      this.addMarkerToMap(markersProp, this.GoogleMap);
-  };
+  // TODO: move it to component
   renderPreviousDirections = () =>
     this.props.Home.get('directions').toArray().map((direction, i) =>
       <div key={i}>
         <p>
           Direction index: {i}
         </p>
-        <Button onClick={() => this.directionsDisplay.setDirections(direction)}>
+        <Button
+          onClick={() => {
+            this.clearMarkers();
+            this.directionsDisplay.setMap(this.GoogleMap);
+            this.directionsDisplay.setDirections(direction);
+          }}
+        >
           show direction
         </Button>
       </div>
     );
+
+  componentDidUpdate = (prevProps: { Home: StateType }) => {
+    const markersProp = this.props.Home.get('markers');
+    if (markersProp.size > 0 && prevProps.Home.get('markers') !== markersProp)
+      this.addMarkerToMap(markersProp, this.GoogleMap);
+  };
+
   render() {
+    // TODO: moves some code to components
     return (
       <div>
         <MapBox
@@ -98,9 +121,9 @@ export class Home extends Component {
           Get Direction
         </Button>
         <Button
-        // TODO: add clear function
-        // onClick={() => this.getDirection()}
-        // disabled={this.props.Home.get('markers').size <= 1}
+          onClick={() => this.clearDirection()}
+          // TODO: disabled statment
+          // disabled={this.props.Home.get('markers').size <= 1}
         >
           Clear result
         </Button>

@@ -24,6 +24,8 @@ const HomeReducer = (state: StateType = initialState, action: ActionType) => {
         'directions',
         state.get('directions').push(action.payload)
       );
+    case type.CLEAR_MARKERS:
+      return state.set('markers', List());
     default:
       return state;
   }

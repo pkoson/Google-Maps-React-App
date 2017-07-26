@@ -19,6 +19,12 @@ export function getDirection(payload: PayloadType): ActionReturnType {
     payload
   };
 }
+export function clearMarkers(payload: PayloadType): ActionReturnType {
+  return {
+    type: types.CLEAR_MARKERS,
+    payload
+  };
+}
 export function saveDirection(payload: PayloadType): ActionReturnType {
   return {
     type: types.SAVE_DIRECTIONS,
