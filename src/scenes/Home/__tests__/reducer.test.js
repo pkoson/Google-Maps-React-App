@@ -20,11 +20,22 @@ describe('HomeReducer', () => {
       List([payload])
     );
   });
-  // google Directions service is asynchronous
   it('should handle GET_DIRECTION action', () => {
+    const payload = 1;
+
     const action = {
-      type: type.GET_DIRECTIONS
+      type: type.SAVE_DIRECTIONS,
+      payload
     };
-    expect(HomeReducer(undefined, action).get('calculating')).toBe(true);
+    expect(HomeReducer(undefined, action).get('directions')).toEqual(
+      List([payload])
+    );
   });
+  // TODO:
+  //   it('should handle GET_DIRECTION action', () => {
+  //     const action = {
+  //       type: type.GET_DIRECTIONS
+  //     };
+  //     expect(HomeReducer(undefined, action).get('calculating')).toBe(true);
+  //   });
 });

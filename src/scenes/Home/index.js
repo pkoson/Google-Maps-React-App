@@ -54,6 +54,7 @@ export class Home extends Component {
     };
     this.directionsService.route(directionData, (result, status) => {
       if (status == 'OK') {
+        // TODO: push result to store
         this.directionsDisplay.setDirections(result);
       }
     });
